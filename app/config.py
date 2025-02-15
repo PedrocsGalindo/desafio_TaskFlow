@@ -21,7 +21,7 @@ def create_tables():
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS tarefa (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
-            nome TEXT NOT NULL,
+            titulo TEXT NOT NULL,
             descricao TEXT NOT NULL,
             status TEXT CHECK(status IN ('pendente', 'em andamento', 'concluido')) NOT NULL,
             usuario INT NOT NULL,
