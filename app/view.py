@@ -10,7 +10,7 @@ def menu():
         print("3 - Criar tarefa")
         print("4 - Listar tarefas")
         print("5 - Exportar tarefas")
-        print("4 - Exportar tarefa")
+        print("6 - Exportar tarefa")
         print("0 - Sair")
 
         escolha = input("Escolha uma opção: ")
@@ -29,11 +29,11 @@ def menu():
                 print("Não existem usuarios para serem listados")
 
         elif escolha == "3":
-            nome = input("Nome da tarefa: ")
+            titulo = input("Nome da tarefa: ")
             descricao = input("Descrição: ")
             while True:
                 try:
-                    status = int(input("Status \n1 - pendente\n2 - em andamento\n3- concluido\n"))
+                    status = int(input("Status \n1 - pendente\n2 - em andamento\n3 - concluido\n"))
                     if status in dict_status:
                         status = dict_status[status]
                         break
@@ -41,8 +41,8 @@ def menu():
                         print("Opção inválida! Tente novamente.")
                 except ValueError:
                     print("Erro: Digite um número válido (1, 2 ou 3).")
-            usuario = int(input("ID do usuário: "))
-            create_task(nome, descricao, status, usuario)
+            usuario = int(input("ID usuario: "))
+            create_task(titulo, descricao, status, usuario)
 
         elif escolha == "4":
             tarefas = list_tasks()
@@ -63,10 +63,10 @@ def menu():
             try:   
                 tarefa = int(input("ID da tarefa: "))
                 tarefa = get_task_by_id(tarefa)
-                if tarefa == None:
-                    print("Tarefa não econtrada")
-                else:
+                if tarefa != None:
                     export_task(tarefa)
+                else: 
+                    print("Tarefa não econtrada")
             except ValueError:
                 print('Escreva um valor numerico')
 

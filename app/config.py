@@ -24,7 +24,7 @@ def create_tables():
             titulo TEXT NOT NULL,
             descricao TEXT NOT NULL,
             status TEXT CHECK(status IN ('pendente', 'em andamento', 'concluido')) NOT NULL,
-            usuario INT NOT NULL,
+            usuario INTEGER NOT NULL,
             FOREIGN KEY (usuario) REFERENCES usuario(id) ON DELETE CASCADE
         )
     """)

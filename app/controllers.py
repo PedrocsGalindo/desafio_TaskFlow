@@ -26,18 +26,18 @@ def create_task(tittle, description, status, user):
     try:
 
         # Verificação da existencia do usuario
-        cursor.execute("SELECT id FROM usuario WHERE id = ?", (user))
-        user = cursor.fetchone()
-        if user is None:  
+        cursor.execute("SELECT id FROM usuario WHERE id = ?", (user,))
+        user_verifiction = cursor.fetchone()
+        if user_verifiction is None:  
             print(f"Erro: Usuário com ID {user} não encontrado.")
             return
         
         # Caso o usuario exista, cria
-        cursor.execute("INSERT INTO tarefa (titulo, descricao, status, usuario) VALUES (?, ?)", (tittle, description, status, user))
+        cursor.execute("INSERT INTO tarefa (titulo, descricao, status, usuario) VALUES (?, ?, ?, ?)", (tittle, description, status, user))
         connection.commit()
         print("Cadastro com sucesso!")
     except Exception as e:
-        print("Erro ao cadastrar usuário:", e)
+        print("Erro ao cadastrar tarefa:", e)
     finally:
         connection.close()
 
@@ -49,10 +49,10 @@ def list_tasks():
     connection.close()
     return tarefas
 
-# retorna a tarefa
+# retorna uma tupla com a tarefa
 def get_task_by_id(id):
     connection, cursor = connect()
-    cursor.execute("SELECT id FROM tarefa WHERE id = ?", (id))
+    cursor.execute("SELECT * FROM tarefa WHERE id = ?", (id,))
     tarefa = cursor.fetchone()
     return tarefa
     
